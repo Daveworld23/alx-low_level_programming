@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * puts_half - function thaat prints half of a string
+ * puts_half - function that prints half of a string
  * if odd, n = (length_of_the_string - 1) / 2
  * @str: input
  * Return: half of input
@@ -19,5 +19,5 @@ void puts_half(char *str)
 		n = ((longi + 1) / 2);
 	for (a = n; str[a] != '\0'; a++)
 		_putchar(str[a]);
-	-putchar('\n');
+	_putchar('\n');
 }
