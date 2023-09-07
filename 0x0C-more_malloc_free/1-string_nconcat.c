@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /**
- * string_nvoncat - function that concatenates two strings
+ * string_nconcat - function that concatenates two strings
  * @s1: string one
  * @s2: string two
  * @n: number of element to concatenate from
