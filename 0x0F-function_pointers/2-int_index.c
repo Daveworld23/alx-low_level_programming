@@ -6,7 +6,7 @@
  * returns index position if true
  * else -1 if false
  * @array: the array
- * @aize: number of element in array
+ * @size: number of element in array
  * @cmp: pointer to function that compares
  *
  * Return: 0
