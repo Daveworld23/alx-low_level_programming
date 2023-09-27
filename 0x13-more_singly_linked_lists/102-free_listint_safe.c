@@ -20,6 +20,7 @@ size_t free_listint_safe(listint_t **h)
 		{
 			last_n = (*h)->next;
 			free(*h);
+			*h = last_n;
 			len++;
 		}
 		else
