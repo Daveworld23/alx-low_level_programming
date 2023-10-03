@@ -46,7 +46,6 @@ int main(int argc, char *argv[])
 	if (to == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write from file %s\n", argv[2]);
-		close_f(from);
 		exit(99);
 	}
 	while ((r = read(from, buff, BUFF_SIZE)) > 0)
