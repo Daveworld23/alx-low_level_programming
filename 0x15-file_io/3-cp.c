@@ -49,6 +49,7 @@ int main(int argc, char *argv[])
 		exit(99);
 	}
 	r = read(from, buff, BUFF_SIZE);
+	if (r > 0)
 	{
 		w = write(to, buff, r);
 		if (w == -1)
