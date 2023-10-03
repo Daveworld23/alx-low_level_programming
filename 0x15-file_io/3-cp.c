@@ -5,7 +5,7 @@
 void close_f(int file_d);
 
 /**
- * close_f - close file descriptor
+ * close_f - close the file descriptors
  * @file_d: file descriptor
  */
 void close_f(int file_d)
@@ -45,27 +45,26 @@ int main(int argc, char *argv[])
 	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (to == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write from file %s\n", argv[2]);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 		exit(99);
 	}
-	r = read(from, buff, BUFF_SIZE);
-	if (r > 0)
+	while ((r = read(from, buff, BUFF_SIZE)) > 0)
 	{
 		w = write(to, buff, r);
 		if (w == -1)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			exit(99);
 			close_f(from);
 			close_f(to);
+			exit(99);
 		}
 	}
 	if (r == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
 		close_f(from);
 		close_f(to);
+		exit(98);
 	}
 	close_f(from);
 	close_f(to);
