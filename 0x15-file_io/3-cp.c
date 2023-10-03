@@ -48,23 +48,21 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't write from file %s\n", argv[2]);
 		exit(99);
 	}
-	while ((r = read(from, buff, BUFF_SIZE)) > 0)
+	r = read(from, buff, BUFF_SIZE);
 	{
 		w = write(to, buff, r);
 		if (w == -1)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			close_f(from);
-			close_f(to);
 			exit(99);
 		}
 	}
 	if (r == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		close_f(from);
-		close_f(to);
 		exit(98);
 	}
+	close_f(from);
+	close_f(to);
 	return (0);
 }
