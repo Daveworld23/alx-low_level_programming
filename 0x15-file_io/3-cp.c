@@ -56,12 +56,16 @@ int main(int argc, char *argv[])
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 			exit(99);
+			close_f(from);
+			close_f(to);
 		}
 	}
 	if (r == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
+		close_f(from);
+		close_f(to);
 	}
 	close_f(from);
 	close_f(to);
