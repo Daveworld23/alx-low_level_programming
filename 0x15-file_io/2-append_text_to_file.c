@@ -17,18 +17,14 @@ int append_text_to_file(const char *filename, char *text_content)
 	file_d = open(filename, O_WRONLY | O_APPEND);
 	if (file_d == -1)
 		return (-1);
-	if (text_content != NULL)
+	if (text_content)
 	{
 		for (len = 0; text_content[len]; len++)
 			;
+		perm = write(file_d, text_content, len);
+		if (perm == -1)
+			return (-1);
 	}
-	else
-	{
-		;
-	}
-	perm = write(file_d, text_content, len);
-	if (perm == -1)
-		return (-1);
 	close(file_d);
 	return (1);
 }
