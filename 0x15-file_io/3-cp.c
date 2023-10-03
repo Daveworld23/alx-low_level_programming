@@ -24,7 +24,7 @@ void close_f(int file_d)
  * main - Copies from one file to the other
  * @argc: Number of argument passed to the program
  * @argv: Array of pointers to arguments
- * Return: 0 on success, otherwise exist.
+ * Return: 0 on success, otherwise exit.
  */
 int main(int argc, char *argv[])
 {
