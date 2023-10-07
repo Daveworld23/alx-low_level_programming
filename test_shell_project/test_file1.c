@@ -3,85 +3,85 @@
 /**
  * print_prompt - displays the shell prompt
  */
-int print_prompt(void)
+void print_prompt(void)
 {
 	char prompt[] = "simple_shell$ ";
-
-	while(1)
-	{
-		write(STDOUT_FILENO, prompt, sizeof(prompt) - 1);
-	}
-	return (0);
+	write(STDOUT_FILENO, prompt, sizeof(prompt) - 1);
 }
 
 /**
- * get_inputs - Accepts and reads input
+ * get_input - Accepts and reads input
  * @buffer: input storage
- * Return: Number of imputs
+ * Return: Number of inputs
  */
 int get_input(char *buffer)
 {
-	char *buff = "NULL";
-	size_t bytes;
-	pid_t ch_pid;
-	int i, status;
+	ssize_t bytes;
+	char *type = NULL;
+	size_t len = 0;
 
-	for (i = 1; i < (*buff); i++)
-	{
-		bytes = getline(&buff, &buffer[BUFF_SIZE], stdin);
-	}
+	bytes = getline(&type, &len, stdin);
 	if (bytes == -1)
 	{
-		perror("ERROR, ");
+		perror("ERROR getline failed");
+		free(type);
+		exit(EXIT_FAILURE);
 	}
-	free(buff);
-	exit;
-	if (buff[bytes - 1] == '\n')
+	if (type[bytes - 1] == '\n')
 	{
-		buff[bytes - 1] = '\0';
+		type[bytes - 1] = '\0';
 	}
-	ch_pid = fork;
-	if (ch_pid == -1)
-	{
-		perror("ERROR, ");
-		exit;
-	}
-	if (ch_pid == 0)
-		_execve(buff, &buffer[BUFF_SIZE], NULL);
-	if (waitpid(ch_pid, &status, 0) == -1)
-	{
-		perror("ERROR, ");
-		exit;
-	}
-	free(buff);
+	strcpy(buffer, type);
+	free(type);
 	return (0);
 }
 
 /**
- * _execve - exceutes a file
- * @buff: pathename
- * @argv: pointer to array of inputs
- * @envp: termination of array
+ * _execute - executes a command
+ * @exe: the command to execute
  */
-int _execve(const char *buffer, char *argv[], char *envp)
+void _execute(const char *exe)
 {
-	char *buff = "NULL";
-	char *env = "NULL";
-	int i;
+	pid_t ch_pid;
+	int status;
 
-	while(buffer[BUFF_SIZE])
+	ch_pid = fork();
+	if (ch_pid == -1)
 	{
-		if (!*buff)
-		{
-			perror("ERROR, ");
-			exit;
-		}
-		else
-		{
-			execve(buff, buffer[BUFF_SIZE], env);
-		}
-		perror("ERROR, ");
-		exit;
+		perror("ERROR Fork failed");
+		exit(EXIT_FAILURE);
 	}
-	exit;
+	if (ch_pid == 0)
+	{
+		char *args[] = {(char*)exe, NULL};
+		if (execvp(exe, args) == -1)
+		{
+			perror("Execution error");
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		if (waitpid(ch_pid, &status, 0) == -1)
+		{
+			perror("ERROR Waitpid failed");
+			exit(EXIT_FAILURE);
+		}
+	}
+}
+
+int main(void)
+{
+	char input_buff[BUFF_SIZE];
+
+	while (1)
+	{
+		print_prompt();
+		if (get_input(input_buff) == -1)
+		{
+			continue;
+		}
+		_execute(input_buff);
+	}
+	return (0);
 }
