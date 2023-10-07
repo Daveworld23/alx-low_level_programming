@@ -23,6 +23,11 @@ int get_input(char *buffer)
 	bytes = getline(&type, &len, stdin);
 	if (bytes == -1)
 	{
+		if (feof(stdin))
+		{
+			free(type);
+			return (-1);
+		}
 		perror("ERROR getline failed");
 		free(type);
 		exit(EXIT_FAILURE);
