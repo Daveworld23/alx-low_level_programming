@@ -13,6 +13,6 @@
 
 void print_prompt(void);
 int get_input(char *buffer);
-void _execute(const char *exe);
+void _execute(const char *exe, char *const args[], char *const envp[]);
 
 #endif

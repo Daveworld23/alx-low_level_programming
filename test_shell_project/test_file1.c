@@ -42,8 +42,10 @@ int get_input(char *buffer)
 /**
  * _execute - executes a command
  * @exe: the command to execute
+ * @args: NULL
+ * @envp: NULL
  */
-void _execute(const char *exe)
+void _execute(const char *exe, char *const args[], char *const envp[])
 {
 	pid_t ch_pid;
 	int status;
@@ -56,8 +58,7 @@ void _execute(const char *exe)
 	}
 	if (ch_pid == 0)
 	{
-		char *args[] = {(char*)exe, NULL};
-		if (execvp(exe, args) == -1)
+		if (execve(exe, args, envp) == -1)
 		{
 			perror("Execution error");
 			exit(EXIT_FAILURE);
