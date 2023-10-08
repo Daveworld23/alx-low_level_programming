@@ -32,12 +32,10 @@ int get_input(char *buffer)
 		free(type);
 		exit(EXIT_FAILURE);
 	}
-	if (type[bytes - 1] == '\n')
+	if (bytes > 0 && buffer[bytes - 1] == '\n')
 	{
-		type[bytes - 1] = '\0';
+		buffer[bytes - 1] = '\0';
 	}
-	strcpy(buffer, type);
-	free(type);
 	return (0);
 }
 
