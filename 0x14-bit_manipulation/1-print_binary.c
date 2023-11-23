@@ -10,9 +10,9 @@ void print_binary(unsigned long int n)
 	unsigned long int base;
 	int bit, start = 0, num = 0;
 
-	for (bit = sizeof(unsigned long int ) * 8 - 1; bit >= 0; bit--)
+	for (bit = sizeof(unsigned long int) * 8 - 1; bit >= 0; bit--)
 	{
-		base = 1UL<< bit;
+		base = 1UL << bit;
 		if (n & base)
 		{
 			start = 1;
