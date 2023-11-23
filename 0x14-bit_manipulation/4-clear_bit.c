@@ -6,7 +6,7 @@
  * @index: index to set value
  * Return: 1 for success, -1 for error
  */
-int clear_bit(unaigned long int *n, unsigned int index)
+int clear_bit(unsigned long int *n, unsigned int index)
 {
 	if (index > (sizeof(*n) * 8))
 		return (-1);

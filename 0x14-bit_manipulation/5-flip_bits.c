@@ -6,7 +6,7 @@
  * @m: second number to flip to
  * Return: number of flipped bits
  */
-unsigned int flip_bits(unsigned long int *n, unsigned long int m)
+unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
 	int count = 0;
 	unsigned long int diff = n ^ m;
