@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * add_dnodeint - adds new node at the end
+ * add_dnodeint_end - adds new node at the end
  * @head: head of the list
  * @n: value of the list
  *
@@ -10,9 +10,9 @@
 dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 {
 	dlistint_t *h;
-	distint_t *new;
+	dlistint_t *new;
 
-	new = malloc (sizeof (dlistint_t)) ;
+	new = malloc(sizeof(dlistint_t));
 	if (new == NULL)
 		return (NULL);
 	new->n = n;
@@ -28,6 +28,6 @@ dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 	{
 		*head = new;
 	}
-	new-›prev = h;
+	new->prev = h;
 	return (new);
 }
